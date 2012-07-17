@@ -44,7 +44,7 @@ int main( int argc, char** argv ){
 
     videoName = argv[1];
     g_capture = videoName;
-    cv::Mat frame;
+    cv::Mat frame, frame_out;
     int frameWidth  = (int)(g_capture.get(CV_CAP_PROP_FRAME_WIDTH));
     int frameHeight = (int)(g_capture.get(CV_CAP_PROP_FRAME_HEIGHT));
     int frames      = (int)(g_capture.get(CV_CAP_PROP_FRAME_COUNT));
@@ -65,11 +65,16 @@ int main( int argc, char** argv ){
 
         if(frame.empty()) break;
 
+        g_capture >> frame_out;
+
+        if( recording )   output << frame_out;
+
+        std::stringstream ss;
+        ss << "Frame " << g_slider_position << "/" << frames;
+        cv::putText( frame, (ss.str()), cv::Point(0,20), CV_FONT_HERSHEY_COMPLEX_SMALL, 1, cv::Scalar(0,0,0), 2, CV_AA );
+        cv::putText( frame, (ss.str()), cv::Point(0,20), CV_FONT_HERSHEY_COMPLEX_SMALL, 1, cv::Scalar(255,255,255), 1, CV_AA );
         cv::imshow( videoName, frame );
         cv::setTrackbarPos( "Position", videoName, ++g_slider_position );
-
-        if( recording )
-            output << frame;
 
         code = (char)cv::waitKey(30);
         if( code == 27 || code == 'q' || code == 'Q' ) break;
