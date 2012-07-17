@@ -1,20 +1,21 @@
-## DESCRIPTION:
+VideoExtractor
+==============
 
-This software is used to extract part of a video. After compiling it, use the software typing on your terminal:
+This C++ uses OpenCV to create a video extracting it from a source video.
+
+Compilation in Code::Blocks
+==============
+The software requires OpenCV (http://opencv.willowgarage.com/wiki/). The project can be compiled in Code::Blocks (http://www.codeblocks.org/), following the procedures reported in:
+http://opencv.willowgarage.com/wiki/CodeBlocks.
+
+Utilization
+==============
+After the compilation, go to the ./bin folder, open a terminal/shell and type
 
 $ ./VidExtract <InputVideo> <OutputVideo>
 	
-Then right-click with the mouse the window that opens, and to control the acquisition type:
+The video acquisition can be controlled left-clicking the video with the mouse, and typing the following commands:
 
-- r / R : to start the acquisition
-- s / S : to stop the acquisition
-- q / Q : to quit the software
-
-## REQUIREMENTS:
-
-The software requires OpenCV: http://opencv.willowgarage.com/wiki/
-
-## COMPILATION IN MAC OSX:
-
-To compile the software in MAC OSX using Code::Blocks (http://www.codeblocks.org/), please follow the link: http://opencv.willowgarage.com/wiki/CodeBlocks
-
+- r / R : start recording
+- s / S : stop recording
+- q / Q : quit program
