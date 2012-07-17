@@ -44,7 +44,7 @@ int main( int argc, char** argv ){
 
     videoName = argv[1];
     g_capture = videoName;
-    cv::Mat frame, frame_out;
+    cv::Mat frame;
     int frameWidth  = (int)(g_capture.get(CV_CAP_PROP_FRAME_WIDTH));
     int frameHeight = (int)(g_capture.get(CV_CAP_PROP_FRAME_HEIGHT));
     int frames      = (int)(g_capture.get(CV_CAP_PROP_FRAME_COUNT));
@@ -65,9 +65,7 @@ int main( int argc, char** argv ){
 
         if(frame.empty()) break;
 
-        g_capture >> frame_out;
-
-        if( recording )   output << frame_out;
+        if( recording )   output << frame;
 
         std::stringstream ss;
         ss << "Frame " << g_slider_position << "/" << frames;
@@ -78,12 +76,12 @@ int main( int argc, char** argv ){
 
         code = (char)cv::waitKey(30);
         if( code == 27 || code == 'q' || code == 'Q' ) break;
-        if( code == 'r' || code == 'R' )
+        if( (code == 'r' || code == 'R') && recording == false )
         {
             recording = true;
             std::cout << "Recording, press s/S to stop" << std::endl;
         }
-        if( code == 's' || code == 'S' )
+        if( (code == 's' || code == 'S')  && recording == true )
         {
             recording = false;
             std::cout << "Stop recording" << std::endl;
